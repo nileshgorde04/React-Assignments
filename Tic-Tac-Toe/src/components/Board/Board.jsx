@@ -4,13 +4,9 @@ import styles from './Board.module.css';
 
 function Board({ squares, onPlay, winningInfo }) {
   function handleClick(i) {
-    if (squares[i] || winningInfo.winner) {
-      return;
-    }
-
-    const nextSquares = squares.slice();
-    nextSquares[i] = 'X'; // We'll let App.jsx decide the player
-    onPlay(nextSquares);
+    // The Board's only job is to report the click event.
+    // It passes the index of the clicked square to the App component.
+    onPlay(i);
   }
 
   const renderSquare = (i) => {

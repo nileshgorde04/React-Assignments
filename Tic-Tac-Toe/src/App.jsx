@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Board from './components/Board/Board.jsx';
 import GameModal from './components/GameModal/GameModal.jsx';
 import './index.css';
@@ -34,32 +34,25 @@ function calculateWinningInfo(squares) {
 function App() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
-  const [winningInfo, setWinningInfo] = useState({ winner: null, line: [], style: {} });
 
-  const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
-  const isTie = !winningInfo.winner && currentSquares.every(Boolean);
-
-  useEffect(() => {
-    const newWinningInfo = calculateWinningInfo(currentSquares);
-    setWinningInfo(newWinningInfo);
-  }, [currentSquares]);
+  const xIsNext = currentMove % 2 === 0;
   
-  function handlePlay(nextSquares) {
+  // State is derived directly on each render
+  const winningInfo = calculateWinningInfo(currentSquares);
+  const isTie = !winningInfo.winner && currentSquares.every(Boolean);
+  
+  function handlePlay(i) {
+    // If there's a winner or the square is taken, do nothing
+    if (winningInfo.winner || currentSquares[i]) {
+      return;
+    }
+
+    const nextSquares = currentSquares.slice();
+    nextSquares[i] = xIsNext ? 'X' : 'O';
+
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     const newCurrentMove = nextHistory.length - 1;
-
-    // Determine whose turn it is *before* this move
-    const isXTurn = (currentMove) % 2 === 0;
-    const player = isXTurn ? 'X' : 'O';
-    
-    // Find which square was just clicked
-    for(let i = 0; i < nextSquares.length; i++){
-        if(nextSquares[i] !== currentSquares[i]){
-            nextSquares[i] = player;
-            break;
-        }
-    }
     
     setHistory(nextHistory);
     setCurrentMove(newCurrentMove);
@@ -68,7 +61,6 @@ function App() {
   function handleReset() {
     setHistory([Array(9).fill(null)]);
     setCurrentMove(0);
-    setWinningInfo({ winner: null, line: [], style: {} });
   }
 
   function jumpTo(move) {
@@ -116,4 +108,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
