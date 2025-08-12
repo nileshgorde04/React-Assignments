@@ -1,0 +1,32 @@
+.boardContainer {
+  position: relative;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+  background-color: var(--secondary-color);
+  padding: 5px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.strike {
+  position: absolute;
+  background-color: var(--accent-color);
+  height: 6px;
+  border-radius: 3px;
+  transform-origin: left center;
+  animation: draw-strike 0.5s ease-out forwards;
+}
+
+@keyframes draw-strike {
+  0% {
+    width: 0;
+  }
+  100% {
+    /* Width is set via inline style */
+  }
+}

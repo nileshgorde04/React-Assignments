@@ -1,0 +1,36 @@
+.square {
+  background: var(--primary-color);
+  border: 2px solid var(--secondary-color);
+  font-size: 3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition-speed) ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+}
+
+.square:hover {
+  background: var(--secondary-color);
+}
+
+.x {
+  color: var(--x-color);
+}
+
+.o {
+  color: var(--o-color);
+}
+
+.winning {
+  background-color: var(--accent-color);
+  animation: pulse 0.6s infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(1.05);
+  }
+}
