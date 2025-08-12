@@ -70,3 +70,33 @@ body {
 .reset-btn:hover {
   background: #e63950;
 }
+.history {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.history h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 6px 12px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  color: #ffda79;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 0.9rem;
+}
+
+.history-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
